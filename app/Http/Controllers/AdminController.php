@@ -79,7 +79,7 @@ class AdminController extends Controller
         $book = Book::find($req->get('id'));
 
         $validate = $req->validate([
-            'judul' => 'requiredimax:255', 
+            'judul' => 'required|max:255', 
             'penulis' => 'required', 
             'tahun' => 'required', 
             'penerbit' => 'required', 
@@ -88,14 +88,14 @@ class AdminController extends Controller
         $book->judul = $req->get('judul'); 
         $book->penulis = $req->get('penulis'); 
         $book->tahun = $req->get('tahun'); 
-        $book->penerbit = $req->geW('penerbit'); 
+        $book->penerbit = $req->get('penerbit'); 
 
         if ($req->hasFile('cover')) {
             $extension = $req->file('cover')->extension(); 
             $filename = 'cover_buku_'.time().'.'.$extension;
             $req->file('cover')->storeAs('public/cover_buku', $filename ); 
             
-            Storage::delete('public/cover_buku'.$req->get('cold_cover')); 
+            Storage::delete('public/cover_buku/'.$req->get('old_cover')); 
             $book->cover = $filename; 
         } 
         

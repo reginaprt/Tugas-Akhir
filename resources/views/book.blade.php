@@ -44,7 +44,7 @@
                                     <button type="button" id="btn-edit-buku" class="btn btn-success" data-toggle="modal" data-target="#editBukuModal" data-id="{{ $book->id }}">
                                         Edit
                                     </button> 
-                                    <button type="button" class="btn btn-danger" onclick="deleteConfirrnation(`{{$book->id}} , `{-($book->judull}' )">
+                                    <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$book->id}}','{{$book->judul}}')">
                                         Hapus
                                     </button>
                                 </div>
@@ -65,7 +65,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class= "modal-title" id="exampleModalLabel">Tambah Data Buku</h5>
+                                    <h5 class= "modal-title" id="exampleModalLabel">Tambah Data Buku</5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -125,7 +125,7 @@
                         <div class="col-md-6"> 
                             <div class="form-group"> 
                                 <label for="edit-judul">Judul Buku</label> 
-                                <input type="text" class="form-control" nama="judul" id="edit-judul" required/>
+                                <input type="text" class="form-control" name="judul" id="edit-judul" required/>
                             </div> 
                             <div class="form-group">
                                 <label for="edit-penulis">Penulis</label> 
@@ -191,46 +191,46 @@
                 });
             });
         });
-    </script>
+        </script>
+        <script> 
+            function deleteConfirmation(id, judul) { 
+                swal.fire({ 
+                    title: "Hapus?", 
+                    type: 'warning', 
+                    text: "Apakah ands yakin akan menghapus data buku dengan judul" + judul + "?!", 
+                    showCancelButton: !0,
+                    confirmButtonText: "Ya, lakukan!", 
+                    cancelButtonText: "Tidak, batalkan!", 
+                    reverseButtons: !O 
+                }).then function (e) { 
+                    if (e.value === true) {
+                        var CSRF_TOKEN = $('meta [name="csrf-token"]').attr('content'); 
+    
+                        $.ajax({ 
+                            type: 'POST', 
+                            url: "books/delete/" + id, 
+                            data: {_token: CSRF_TOKEN}, 
+                            dataType: 'JSON', 
+                            success: function (results) { 
+                                if (results.success === true) { 
+                                    swal.fire("Done!", results.message, "success"); 
+                                    setTimeout(function(){ 
+                                        location.reload(); 
+                                    },1000);
+                                } else { 
+                                     swal.fire("Error!", result.message, "error");
+                                }
+                            }
+                        }); 
+                    } else { 
+                        e.dismiss; 
+                    } 
+                }, function (dismiss) {
+                     return false; 
+                }
+            }
+        </script>
 @stop
 
 @section('js') 
-    <script> 
-        function deleteConfirmation(npm, judul) { 
-            swal.fire({ 
-                title: "Hapus?", 
-                type: 'warning', 
-                text: "Apakah ands yakin akan menghapus data buku dengan judul" + judul+"?!", 
-                showCancelButton: !0,
-                confirmButtonText: "Ya, lakukan!", 
-                cancelButtonText: "Tidak, batalkan!", 
-                reverseButtons: !O 
-            }).then function (e) { 
-                if (e.value === true) {
-                    var CSRF_TOKEN = $('meta [name="csrf-token"]').attr('content'); 
-
-                    $.ajax({ 
-                        type: 'POST', 
-                        url: "books/delete/" + npm, 
-                        data: {_token: CSRF_TOKEN}, 
-                        dataType: 'JSON', 
-                        success: function (results) { 
-                            if (results.success === true) { 
-                                swal.fire("Done!", results.message, "success"); 
-                                setTimeout(function(){ 
-                                    location.reload(); 
-                                },1000);
-                            } else { 
-                                 swal.fire("Error!", result.message, "error");
-                            }
-                        }
-                    }); 
-                } else { 
-                    e.dismiss; 
-                } 
-            }, function (dismiss) {
-                 return false; 
-            }
-        }
-    </script>
 @stop
