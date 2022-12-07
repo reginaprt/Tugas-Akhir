@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="card card-default">
-        <div class="card-header">{{__('Book Managemen')}}</div>
+    <div class="card-header">{{__('Pengelolaan Buku')}}</div>
         <div class="card-body">
             <table id="table-data" class="table table-bordered">
                 <thead>
@@ -44,7 +44,7 @@
                                     <button type="button" id="btn-edit-buku" class="btn btn-success" data-toggle="modal" data-target="#editBukuModal" data-id="{{ $book->id }}">
                                         Edit
                                     </button> 
-                                    <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$book->id}}','{{$book->judul}}')">
+                                    <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$book->id}}' , '{{$book->judul}}' )">
                                         Hapus
                                     </button>
                                 </div>
@@ -58,6 +58,10 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal">
                 <i class="fa fa-plus">   Tambah Data</i>
             </button>
+            <a href="{{ route('admin.print.books') }}" target="_blank" class="btn btn-secondary">
+                <i class="fa fa-print"></i>
+                Cetak PDF
+            </a>
             <hr>
             <table id="table-data" class="table table-bordered">
                 <thead>
@@ -119,13 +123,13 @@
             </div> 
             <div class="modal-body"> 
                 <form method="post" action="{{ route('admin.book.update') }}" enctype="multipart/form-data"> 
-                    @csrf 
-                    @method('PATCH') 
+                    @csrf
+                    @method ('PATCH')
                     <div class="row"> 
                         <div class="col-md-6"> 
                             <div class="form-group"> 
                                 <label for="edit-judul">Judul Buku</label> 
-                                <input type="text" class="form-control" name="judul" id="edit-judul" required/>
+                                <input type="text" class="form-control" id="edit-judul" name="judul" required/>
                             </div> 
                             <div class="form-group">
                                 <label for="edit-penulis">Penulis</label> 
@@ -183,7 +187,7 @@
                         $('#edit-old-cover').val(res.cover); 
                     
                         if (res.cover !== null) { 
-                            $('#image-area').append("<img src='"+baseur1+"/storage/cover_buku/"+res.cover+"' width='200px'/>" );
+                            $('#image-area').append("<img src='"+baseurl+"/storage/cover_buku/"+res.cover+"' width='200px'/>" );
                         } else { 
                             $('#image-area').append('[Gambar tidak tersedia]'); 
                         }
@@ -191,46 +195,42 @@
                 });
             });
         });
-        </script>
-        <script> 
-            function deleteConfirmation(id, judul) { 
-                swal.fire({ 
-                    title: "Hapus?", 
-                    type: 'warning', 
-                    text: "Apakah ands yakin akan menghapus data buku dengan judul" + judul + "?!", 
-                    showCancelButton: !0,
-                    confirmButtonText: "Ya, lakukan!", 
-                    cancelButtonText: "Tidak, batalkan!", 
-                    reverseButtons: !O 
-                }).then function (e) { 
-                    if (e.value === true) {
-                        var CSRF_TOKEN = $('meta [name="csrf-token"]').attr('content'); 
-    
-                        $.ajax({ 
-                            type: 'POST', 
-                            url: "books/delete/" + id, 
-                            data: {_token: CSRF_TOKEN}, 
-                            dataType: 'JSON', 
-                            success: function (results) { 
-                                if (results.success === true) { 
-                                    swal.fire("Done!", results.message, "success"); 
-                                    setTimeout(function(){ 
-                                        location.reload(); 
-                                    },1000);
-                                } else { 
-                                     swal.fire("Error!", result.message, "error");
-                                }
-                            }
-                        }); 
-                    } else { 
-                        e.dismiss; 
-                    } 
-                }, function (dismiss) {
-                     return false; 
-                }
-            }
-        </script>
-@stop
 
-@section('js') 
+        function deleteConfirmation(id,judul) { 
+            swal.fire({ 
+                title: "Hapus?", 
+                type: 'warning', 
+                text: "Apakah ands yakin akan menghapus data buku dengan judul" +judul+"?!", 
+                showCancelButton: !0,
+                confirmButtonText: "Ya, lakukan!", 
+                cancelButtonText: "Tidak, batalkan!", 
+                 
+            }).then (function (e) { 
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+
+                    $.ajax({ 
+                        type: 'POST', 
+                        url: "books/delete/" + id, 
+                        data: {_token: CSRF_TOKEN}, 
+                        dataType: 'JSON', 
+                        success: function (results) { 
+                            if (results.success === true) { 
+                                swal.fire("Done!", results.message, "success"); 
+                                setTimeout(function(){ 
+                                    location.reload(); 
+                                },1000);
+                            } else { 
+                                 swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    }); 
+                } else { 
+                    e.dismiss; 
+                } 
+            }, function (dismiss) {
+                 return false; 
+            })
+        }
+    </script>
 @stop

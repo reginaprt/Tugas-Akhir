@@ -32,8 +32,6 @@ Route::get('home', [\App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('admin/books', [\App\Http\Controllers\AdminController::class, 'books'])->name('admin.books')->middleware('is_admin');
 
-Route::get('admin/pasien', [\App\Http\Controllers\AdminController::class, 'pasien'])->name('admin.pasien')->middleware('is_admin');
-
 Route::post('admin/books', [\App\Http\Controllers\AdminController::class, 'submit_book'])->name('admin.book.submit')->middleware('is_admin');
 
 Route::patch('admin/books/update', [\App\Http\Controllers\AdminController::class, 'update_book'])->name('admin.book.update')->middleware('is_admin');
@@ -42,3 +40,12 @@ Route::post('admin/books/update/{id}', [\App\Http\Controllers\AdminController::c
 
 Route::get('admin/ajaxadmin/dataBuku/{id}', [\App\Http\Controllers\AdminController::class, 'getDataBuku']);
 
+Route::post('admin/books/delete/{id}', [App\Http\Controllers\AdminController::class,'delete_book'])->name('admin.book.delete')->middleware('is_admin');
+Auth::routes();
+
+Route::get('admin/print_books', [App\Http\Controllers\AdminController::class,'print_books'])->name('admin.print.books')->middleware('is_admin');
+
+
+Route::get('/home', function() {
+    return view('home');
+})->name('home')->middleware('auth');

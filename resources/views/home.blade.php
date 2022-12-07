@@ -17,11 +17,6 @@
                     <div class="card-body">
                         <p class="mb-0">You are logged in!</p>
 
-                        @if($user->roles_id == 1)
-                            Anda Masuk Sebagai Admin
-                        @else 
-                            Anda Masuk Sebagai User
-                        @endif
                     </div>
                 </div>
             </div>
