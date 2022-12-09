@@ -9,6 +9,7 @@
     <br>
     <table id="table-data" class="table table-bordered">
                 <thead>
+                    <tr>
                         <th>NO</th>
                         <th>JUDUL</th>
                         <th>PENULIS</th>
@@ -29,7 +30,7 @@
                             <td>{{$book->penerbit}}</td>
                             <td>
                                 @if($book->cover !== null)
-                                    <img src="{{asset('storage/cover_buku/'.$book->cover)}}" width="100px">
+                                    <img src="{{ public_path('storage/cover_buku/'.$book->cover)}}" width="80px">
                                 @else
                                         [Gambar Tidak Tersedia]
                                 @endif
