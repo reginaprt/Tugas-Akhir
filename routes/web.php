@@ -45,6 +45,8 @@ Auth::routes();
 
 Route::get('admin/print_books', [App\Http\Controllers\AdminController::class,'print_books'])->name('admin.print.books')->middleware('is_admin');
 
+Route::get('admin/books/export', [App\Http\Controllers\AdminController::class,'export'])->name('admin.print.export')->middleware('is_admin');
+
 
 Route::get('/home', function() {
     return view('home');

@@ -18,6 +18,12 @@
                 <i class="fa fa-print"></i>
                 Cetak PDF
             </a>
+            <div class="btn-group" role="group" aria-label="Basic Example">
+                <a href="{{ route('admin.print.export') }}" target="_blank" class="btn btn-info">
+                    Export
+                </a>
+                <a href="" class="btn btn-warning">Import</a>
+            </div>
             <hr>
             <table id="table-data" class="table table-bordered">
                 <thead>

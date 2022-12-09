@@ -73,7 +73,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
         @endif
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -94,7 +94,7 @@
     @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)

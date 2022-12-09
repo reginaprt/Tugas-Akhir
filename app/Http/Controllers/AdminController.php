@@ -136,4 +136,9 @@ class AdminController extends Controller
 
         return $pdf->download('data-buku.pdf');
     }
+
+    public function export(){
+
+        return Excel::download(new BooksExport, 'books.xlsx');
+    }
 }
