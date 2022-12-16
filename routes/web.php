@@ -47,6 +47,8 @@ Route::get('admin/print_books', [App\Http\Controllers\AdminController::class,'pr
 
 Route::get('admin/books/export', [App\Http\Controllers\AdminController::class,'export'])->name('admin.print.export')->middleware('is_admin');
 
+Route::post('admin/books/import', [App\Http\Controllers\AdminController::class,'import'])->name('admin.book.import')->middleware('is_admin');
+
 
 Route::get('/home', function() {
     return view('home');
