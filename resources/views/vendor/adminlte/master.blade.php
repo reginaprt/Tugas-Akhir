@@ -72,8 +72,8 @@
         <link rel="manifest" crossorigin="use-credentials" href="{{ asset('favicons/manifest.json') }}">
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
-        @endif
-        
+    @endif
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -94,7 +94,7 @@
     @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)
@@ -106,61 +106,77 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-
     <script>
+        //Sweet Alert
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
         })
-        @if(Session::has('massage'))
+
+        @if(Session::has('message'))
             var type = "{{Session::get('alert-type')}}";
+
             switch (type){
                 case 'info':
                     Toast.fire({
-                        type: 'info',
-                        title: "{{ Session::get('message') }}"
+                        icon: 'info',
+                        title: "{{Session::get('message')}}"
                     })
                     break;
-                    case 'success':
+                case 'success':
                     Toast.fire({
-                        type: 'success',
-                        title: "{{ Session::get('message') }}"
+                        icon: 'success',
+                        title: "{{Session::get('message')}}"
                     })
                     break;
-                    case 'error':
+                case 'warning':
                     Toast.fire({
-                        type: 'error',
-                        title: "{{ Session::get('message') }}"
+                        icon: 'warning',
+                        title: "{{Session::get('message')}}"
                     })
                     break;
-                    case 'info':
+                case 'error':
                     Toast.fire({
-                        type: 'info',
+                        icon: 'error',
+                        title: "{{Session::get('message')}}"
+                    })
+                    break;
+                case 'dialog_error':
+                    Swal.fire({
+                        icon: 'error',
                         title: "Ooops",
-                        text: "{{ Session::get('message') }}"
+                        text: "{{Session::get('message')}}",
                         timer: 3000
                     })
                     break;
             }
-            @endif
+        @endif
 
-            @if ($errors->any())
-                @foreach($errors->all() as $errors)
-                    Swal.fire({
-                        type: 'error',
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                Swal.fire({
+                    type: 'error',
+                    title: "Ooops",
+                    text: "{{ $error}}",
+                })
+            @endforeach
+        @endif
+
+        @if ($errors->any())
+            Swal.fire({
+                        icon: 'error',
                         title: "Ooops",
-                        text: "{{ $error }}",
+                        text: "Terjadi suatu kesalahan",
                     })
-                    @endforeach
-                @endif
-                
-                $('#table-data').DataTable();
+        @endif
 
-                let baseurl = "<?=url("/")?>";
-                let fullURL = "<?=url()->full()?>";
-    </script>
+        $('#table-data').DataTable();
+
+        let baseurl = "<?=url('/')?>";
+        let fullRL = "<?=url()->full()?>";
+</script>
 </body>
 
 </html>

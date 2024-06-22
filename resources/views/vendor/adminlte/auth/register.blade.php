@@ -11,7 +11,7 @@
     @php( $register_url = $register_url ? url($register_url) : '' )
 @endif
 
-@section('auth_header', __('adminlte::adminlte.register_message'))
+@section('auth_header', __('Daftar Akun Baru'))
 
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
@@ -30,42 +30,6 @@
 
             @error('name')
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        {{-- Role field --}}
-        <div class="input-group mb-3">
-            <input type="text" name="roles_id" class="form-control @error('roles_id') is-invalid @enderror"
-                   value="{{ old('roles_id') }}" placeholder="{{ __('Role') }}" autofocus>
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
-
-            @error('role')
-                <span class="invalid-feedback" name="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        {{-- Username field --}}
-        <div class="input-group mb-3">
-            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
-                   value="{{ old('username') }}" placeholder="{{ __('Username') }}" autofocus>
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
-
-            @error('role')
-                <span class="invalid-feedback" name="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
@@ -138,7 +102,7 @@
 @section('auth_footer')
     <p class="my-0">
         <a href="{{ $login_url }}">
-            {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+            {{ __('Sudah Punya Akun?') }}
         </a>
     </p>
 @stop

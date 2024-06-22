@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Menu</b>Remata',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -99,7 +99,10 @@ return [
     | Preloader Animation
     |--------------------------------------------------------------------------
     |
-    | Here you can change the preloader animation configuration.
+    | Here you can change the preloader animation configuration. Currently, two
+    | modes are supported: 'fullscreen' for a fullscreen preloader animation
+    | and 'cwrapper' to attach the preloader animation into the content-wrapper
+    | element and avoid overlapping it with the sidebars and the top navbar.
     |
     | For detailed instructions you can look the preloader section here:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
@@ -108,6 +111,7 @@ return [
 
     'preloader' => [
         'enabled' => true,
+        'mode' => 'fullscreen',
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -293,7 +297,7 @@ return [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'search',
+            'text'         => 'Search',
             'topnav_right' => true,
         ],
         [
@@ -304,26 +308,45 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Search',
         ],
-        ['header' => 'Book Managemen'],
         [
-            'text' => 'Buku',
-            'url'  => 'admin/books',
-            'icon' => 'fas fa-fw fa-book',
+            'text' => '_ Dashboard',
+            'url'  => 'admin/home',
+            'icon' => 'fas fa-solid fa-house-user',
+        ],
+        ['header' => 'Menu Managemen'],
+        [
+            'text' => '_ Menu Makanan',
+            'url'  => 'admin/menus',
+            'icon' => 'fas fa-solid fa-utensils',
             'can'  => 'isAdmin',
         ],
+        // [
+        //     'text' => '_ Buku',
+        //     'url'  => 'admin/books',
+        //     'icon' => 'fas fa-fw fa-book',
+        //     'can'  => 'isAdmin',
+        // ],
+
+
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => '_ Input Data BBI',
+            'url'  => 'user/bbi',
+            'icon' => 'fas fa-solid fa-plus',
+            'can'  => 'isUser',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text' => '_ Rekomendasi Menu',
+            'url'  => 'user/rekomendasi',
+            'icon' => 'fas fa-solid fa-utensils',
+            'can'  => 'isUser',
+        ],
+        [
+            'text' => '_ Hasil Akhir',
+            'url'  => 'user/hasil',
+            'icon' => 'fas fa-solid fa-file',
+            'can'  => 'isUser',
         ],
     ],
 
@@ -363,7 +386,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -383,7 +406,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -398,7 +421,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -408,7 +431,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
