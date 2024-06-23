@@ -3,6 +3,8 @@
 @php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
 @php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
 
+@section('title', 'Register Page')
+
 @if (config('adminlte.use_route_url', false))
     @php( $login_url = $login_url ? route($login_url) : '' )
     @php( $register_url = $register_url ? route($register_url) : '' )
@@ -19,6 +21,7 @@
 
         {{-- Name field --}}
         <div class="input-group mb-3">
+            <input type="text" name="roles_id" value="2" hidden>
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                    value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
 

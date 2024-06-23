@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BbiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +30,25 @@ Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')-
 
 
 Route::middleware(['is_admin'])->group(function () {
+
+    // Menu ------------------------------------------------------------------------------------------------------------
     Route::get('admin/menus', [MenuController::class, 'index'])->name('admin.menu');
     Route::post('admin/menus', [MenuController::class, 'create'])->name('admin.menu.create');
     Route::get('admin/ajaxadmin/dataMenu/{id}', [MenuController::class, 'dataMenu']);
-    Route::patch('admin/menus/update/{id}', [MenuController::class, 'update'])->name('admin.menu.update');
+    Route::patch('admin/menus/update', [MenuController::class, 'update'])->name('admin.menu.update');
     Route::post('admin/menus/delete/{id}', [MenuController::class, 'delete'])->name('admin.menu.delete');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+
+    // Bbi -------------------------------------------------------------------------------------------------------------
+    Route::get('user/bbis', [BbiController::class, 'index'])->name('user.bbi');
+    Route::post('user/bbis', [BbiController::class, 'create'])->name('user.bbi.create');
+    Route::get('user/ajaxuser/dataBbi/{id}', [BbiController::class, 'dataBbi']);
+    Route::patch('user/bbis/update', [BbiController::class, 'update'])->name('user.bbi.update');
+    Route::post('user/bbis/delete/{id}', [BbiController::class, 'delete'])->name('user.bbi.delete');
+
+    // Rekomendasi Menu ------------------------------------------------------------------------------------------------
+    Route::get('user/bbis', [BbiController::class, 'index'])->name('user.bbi');
 });

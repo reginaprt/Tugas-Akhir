@@ -124,37 +124,42 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="edit-nama">Nama Makanan</label>
-                        <input type="text" class="form-control" id="edit-id" name="id" hidden>
-                        <input type="text" class="form-control" id="edit-nama" name="nama" required>
+                    <form action="{{ route('admin.menu.update') }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <div class="form-group">
+                            <label for="edit-nama">Nama Makanan</label>
+                            <input type="text" class="form-control" id="edit-id" name="id" hidden>
+                            <input type="text" class="form-control" id="edit-nama" name="nama" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="edit-energi">Energi</label>
+                                <input type="number" class="form-control" id="edit-energi" name="energi" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="edit-protein">Protein</label>
+                                <input type="number" class="form-control" id="edit-protein" name="protein" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="edit-lemak">Lemak</label>
+                                <input type="number" class="form-control" id="edit-lemak" name="lemak" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="edit-karbo">Karbo</label>
+                                <input type="number" class="form-control" id="edit-karbo" name="karbo" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-resep">Resep</label>
+                            <textarea class="form-control" id="edit-resep" name="resep" rows="3" required></textarea>
+                        </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="edit-energi">Energi</label>
-                            <input type="number" class="form-control" id="edit-energi" name="energi" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="edit-protein">Protein</label>
-                            <input type="number" class="form-control" id="edit-protein" name="protein" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="edit-lemak">Lemak</label>
-                            <input type="number" class="form-control" id="edit-lemak" name="lemak" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="edit-karbo">Karbo</label>
-                            <input type="number" class="form-control" id="edit-karbo" name="karbo" required>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
-                    <div class="form-group">
-                        <label for="edit-resep">Resep</label>
-                        <textarea class="form-control" id="edit-resep" name="resep" rows="3" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary">Simpan Perubahan</button>
+                    </form>
                 </div>
             </div>
         </div>

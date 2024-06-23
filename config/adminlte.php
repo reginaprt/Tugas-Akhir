@@ -304,7 +304,7 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-        
+
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
@@ -314,6 +314,13 @@ return [
             'text' => '_ Dashboard',
             'url'  => 'admin/home',
             'icon' => 'fas fa-solid fa-house-user',
+            'can'  => 'isAdmin',
+        ],
+        [
+            'text' => '_ Dashboard',
+            'url'  => 'home',
+            'icon' => 'fas fa-solid fa-house-user',
+            'can'  => 'isUser',
         ],
         ['header' => 'Menu Managemen'],
         [
@@ -332,7 +339,7 @@ return [
 
         [
             'text' => '_ Input Data BBI',
-            'url'  => 'user/bbi',
+            'url'  => 'user/bbis',
             'icon' => 'fas fa-solid fa-plus',
             'can'  => 'isUser',
         ],

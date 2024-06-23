@@ -108,7 +108,6 @@
     @yield('adminlte_js')
 
     <script>
-        //Sweet Alert
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -118,65 +117,49 @@
 
         @if(Session::has('message'))
             var type = "{{Session::get('alert-type')}}";
-
             switch (type){
                 case 'info':
                     Toast.fire({
                         icon: 'info',
-                        title: "{{Session::get('message')}}"
+                        title: "{{ Session::get('message') }}"
                     })
                     break;
-                case 'success':
+                    case 'success':
                     Toast.fire({
                         icon: 'success',
-                        title: "{{Session::get('message')}}"
+                        title: "{{ Session::get('message') }}"
                     })
                     break;
-                case 'warning':
-                    Toast.fire({
-                        icon: 'warning',
-                        title: "{{Session::get('message')}}"
-                    })
-                    break;
-                case 'error':
+                    case 'error':
                     Toast.fire({
                         icon: 'error',
-                        title: "{{Session::get('message')}}"
+                        title: "{{ Session::get('message') }}"
                     })
                     break;
-                case 'dialog_error':
-                    Swal.fire({
-                        icon: 'error',
+                    case 'info':
+                    Toast.fire({
+                        icon: 'info',
                         title: "Ooops",
-                        text: "{{Session::get('message')}}",
-                        timer: 3000
+                        text: "{{ Session::get('message') }}"
                     })
                     break;
             }
         @endif
 
-        @if($errors->any())
-            @foreach($errors->all() as $error)
-                Swal.fire({
-                    type: 'error',
-                    title: "Ooops",
-                    text: "{{ $error}}",
-                })
-            @endforeach
-        @endif
-
         @if ($errors->any())
+        @foreach($errors->all() as $errors)
             Swal.fire({
-                        icon: 'error',
-                        title: "Ooops",
-                        text: "Terjadi suatu kesalahan",
-                    })
+                type: 'error',
+                title: "Ooops",
+                text: "{{ $errors }}",
+            })
+            @endforeach
         @endif
 
         $('#table-data').DataTable();
 
-        let baseurl = "<?=url('/')?>";
-        let fullRL = "<?=url()->full()?>";
+        let baseurl = "<?=url("/")?>";
+        let fullURL = "<?=url()->full()?>";
     </script>
 </body>
 

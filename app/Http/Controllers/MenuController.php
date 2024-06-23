@@ -54,9 +54,9 @@ class MenuController extends Controller
     }
 
     // Menu Update ----------------------------------------------------------------------------------------------------
-    public function update(Request $req, $id)
+    public function update(Request $req)
     {
-        $menu = Menu::find($id);
+        $menu = Menu::find($req->get('id'));
 
         if (!$menu) {
             return redirect()->route('admin.menu')->with('error', 'Menu not found');
@@ -77,6 +77,8 @@ class MenuController extends Controller
         $menu->lemak = $req->get('lemak');
         $menu->karbo = $req->get('karbo');
         $menu->resep = $req->input('resep');
+
+        $menu->save();
 
         $notification = array(
             'message' => 'Menu Makanan Berhasil di Ubah',
