@@ -106,6 +106,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+
     <script>
         //Sweet Alert
         const Toast = Swal.mixin({
@@ -176,7 +177,7 @@
 
         let baseurl = "<?=url('/')?>";
         let fullRL = "<?=url()->full()?>";
-</script>
+    </script>
 </body>
 
 </html>

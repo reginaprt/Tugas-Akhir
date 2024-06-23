@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Dashboard')
 
 @section('content_header')
 <h1 class="m-0 text-dark">Dashboard</h1>
-@stop   
+@stop
 
 @section('content')
 <div class="container">
