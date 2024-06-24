@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BbiController;
+use App\Http\Controllers\RekomenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('user/bbis/delete/{id}', [BbiController::class, 'delete'])->name('user.bbi.delete');
 
     // Rekomendasi Menu ------------------------------------------------------------------------------------------------
-    Route::get('user/bbis', [BbiController::class, 'index'])->name('user.bbi');
+    Route::get('user/rekomendasi', [RekomenController::class, 'index'])->name('user.rekomen');
+    Route::get('user/rekomendasi/check', [RekomenController::class, 'check'])->name('user.rekomen.check');
+    Route::get('user/ajaxuser/dataRekomen/{id}', [RekomenController::class, 'dataRekomen']);
 });

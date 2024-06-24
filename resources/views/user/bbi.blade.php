@@ -40,10 +40,10 @@
                     <label for="tinggi_badan" class="col-sm-2 col-form-label">Tinggi Badan</label>
                     <div class="col-sm-10">
                         <div class="input-group">
+                            <input type="number" class="form-control" id="tinggi_badan" name="tinggi_badan" required value="{{$user->tinggi_badan}}">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cm</span>
                             </div>
-                            <input type="number" class="form-control" id="tinggi_badan" name="tinggi_badan" required value="{{$user->tinggi_badan}}">
                         </div>
                     </div>
                 </div>
@@ -51,10 +51,10 @@
                     <label for="berat_badan" class="col-sm-2 col-form-label">Berat Badan</label>
                     <div class="col-sm-10">
                         <div class="input-group">
+                            <input type="number" class="form-control" id="berat_badan" name="berat_badan" required value="{{$user->berat_badan}}">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Kg</span>
                             </div>
-                            <input type="number" class="form-control" id="berat_badan" name="berat_badan" required value="{{$user->berat_badan}}">
                         </div>
                     </div>
                 </div>
@@ -66,22 +66,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary col-md-12">Simpan Perubahan</button>
             </form>
-        </div>
-    </div>
-    <div class="card card-success">
-        <div class="card-header">Hasil Perhitungan Berat Badan Ideal</div>
-        <div class="card-body">
-            <h2 class="text-center">
-                @if($user->hasil == 'Under')
-                    Kekurangan Berat Badan
-                @elseif($user->hasil == 'Normal')
-                    Berat Badan Normal
-                @elseif($user->hasil == 'Over')
-                    Kelebihan Berat Badan
-                @else
-                    Lengkapi Data Dulu
-                @endif
-            </h2>
         </div>
     </div>
 @stop
