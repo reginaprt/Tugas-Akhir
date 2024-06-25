@@ -100,8 +100,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="resep">Resep</label>
-                        <textarea class="form-control" id="resep" name="resep" rows="3" required></textarea>
+                        <label for="bahan">Bahan-bahan</label>
+                        <textarea class="form-control" id="bahan" name="bahan" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cara">Cara Membuat</label>
+                        <textarea class="form-control" id="cara" name="cara" rows="3" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -151,8 +155,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="edit-resep">Resep</label>
-                            <textarea class="form-control" id="edit-resep" name="resep" rows="3" required></textarea>
+                            <label for="edit-bahan">Bahan-bahan</label>
+                            <textarea class="form-control" id="edit-bahan" name="bahan" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-cara">Cara Membuat</label>
+                            <textarea class="form-control" id="edit-cara" name="cara" rows="3" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -181,8 +189,12 @@
                         <div id="show-nama"></div>
                     </div>
                     <div class="form-group">
-                        <label for="show-resep">Resep</label>
-                        <div id="show-resep"></div>
+                        <label for="show-bahan">Bahan-bahan</label>
+                        <div id="show-bahan"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="show-cara">Cara Membuat</label>
+                        <div id="show-cara"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -210,7 +222,8 @@
                         $('#edit-protein').val(res.protein);
                         $('#edit-lemak').val(res.lemak);
                         $('#edit-karbo').val(res.karbo);
-                        $('#edit-resep').val(res.resep);
+                        $('#edit-bahan').val(res.bahan);
+                        $('#edit-cara').val(res.cara);
                         $('#edit-id').val(res.id);
                     },
                 });
@@ -228,7 +241,8 @@
                     dataType: 'json',
                     success: function(res){
                         $('#show-nama').text(res.nama);
-                        $('#show-resep').html(res.resep.replace(/\n/g, '<br>'));
+                        $('#show-bahan').html(res.bahan.replace(/\n/g, '<br>'));
+                        $('#show-cara').html(res.cara.replace(/\n/g, '<br>'));
                         $('#show-id').text(res.id);
                     },
                 });

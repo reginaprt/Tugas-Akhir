@@ -23,7 +23,8 @@ class MenuController extends Controller
             'protein' => 'required|integer',
             'lemak' => 'required|integer',
             'karbo' => 'required|integer',
-            'resep' => 'required',
+            'bahan' => 'required',
+            'cara' => 'required',
         ]);
 
         $menu = new Menu;
@@ -33,7 +34,8 @@ class MenuController extends Controller
         $menu->protein = $req->get('protein');
         $menu->lemak = $req->get('lemak');
         $menu->karbo = $req->get('karbo');
-        $menu->resep = $req->input('resep');
+        $menu->bahan = $req->input('bahan');
+        $menu->cara = $req->input('cara');
 
         $menu->save();
 
@@ -68,7 +70,8 @@ class MenuController extends Controller
             'protein' => 'sometimes|required|integer',
             'lemak' => 'sometimes|required|integer',
             'karbo' => 'sometimes|required|integer',
-            'resep' => 'sometimes|required',
+            'bahan' => 'sometimes|required',
+            'cara' => 'sometimes|required',
         ]);
 
         $menu->nama = $req->get('nama');
@@ -76,7 +79,8 @@ class MenuController extends Controller
         $menu->protein = $req->get('protein');
         $menu->lemak = $req->get('lemak');
         $menu->karbo = $req->get('karbo');
-        $menu->resep = $req->input('resep');
+        $menu->bahan = $req->input('bahan');
+        $menu->cara = $req->input('cara');
 
         $menu->save();
 

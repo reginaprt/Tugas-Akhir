@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BbiController;
 use App\Http\Controllers\RekomenController;
+use App\Http\Controllers\HasilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user/rekomendasi', [RekomenController::class, 'index'])->name('user.rekomen');
     Route::get('user/rekomendasi/check', [RekomenController::class, 'check'])->name('user.rekomen.check');
     Route::get('user/ajaxuser/dataRekomen/{id}', [RekomenController::class, 'dataRekomen']);
+
+    // Hasil Akhir -----------------------------------------------------------------------------------------------------
+    Route::get('user/hasil', [HasilController::class, 'index'])->name('user.rekomen');
+    Route::get('user/print-hasil', [HasilController::class,'print_hasil'])->name('user.print.hasil');
+
 });

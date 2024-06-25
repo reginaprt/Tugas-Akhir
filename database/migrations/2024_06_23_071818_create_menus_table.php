@@ -20,7 +20,8 @@ class CreateMenusTable extends Migration
             $table->integer('protein');
             $table->integer('lemak');
             $table->integer('karbo');
-            $table->text('resep');
+            $table->text('bahan');
+            $table->text('cara');
             $table->timestamps();
         });
     }

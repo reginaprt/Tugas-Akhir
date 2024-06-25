@@ -12,13 +12,13 @@
 
         switch ($user->hasil) {
             case 'Under':
-                $rekomendasi = [$rekomenUnder1, $rekomenUnder2, $rekomenUnder3];
+                $rekomendasi = [$rekomenUnder1, $rekomenUnder2, $rekomenUnder3, $rekomenUnder4, $rekomenUnder5, $rekomenUnder6, $rekomenUnder7];
                 break;
             case 'Normal':
-                $rekomendasi = [$rekomenNormal1, $rekomenNormal2, $rekomenNormal3];
+                $rekomendasi = [$rekomenNormal1, $rekomenNormal2, $rekomenNormal3, $rekomenNormal4, $rekomenNormal5, $rekomenNormal6, $rekomenNormal7];
                 break;
             case 'Over':
-                $rekomendasi = [$rekomenOver1, $rekomenOver2, $rekomenOver3];
+                $rekomendasi = [$rekomenOver1, $rekomenOver2, $rekomenOver3, $rekomenOver4, $rekomenOver5, $rekomenOver6, $rekomenOver7];
                 break;
             default:
                 break;
@@ -27,7 +27,7 @@
 
     @foreach ($rekomendasi as $index => $rekomendasiGroup)
         <div class="card card-secondary">
-            <div class="card-header">Menu Rekomendasi {{ $index + 1 }}</div>
+            <div class="card-header">Rekomendasi Hari {{ ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'][$index] }}</div>
             <div class="table-responsive">
                 <table class="table" style="width: 100%;">
                     <thead>
@@ -45,7 +45,7 @@
                         @foreach ($rekomendasiGroup as $menu)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $menu['Name'] }}</td>
+                                <td>{{ $menu['Nama'] }}</td>
                                 <td class="text-center">{{ $menu['Energi'] }}</td>
                                 <td class="text-center">{{ $menu['Protein'] }}</td>
                                 <td class="text-center">{{ $menu['Lemak'] }}</td>
@@ -63,11 +63,6 @@
         </div>
     @endforeach
 
-
-
-
-
-
     <!-- Modal Resep -->
     <div class="modal fade" id="resepModal" tabindex="-1" aria-labelledby="resepModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
@@ -84,8 +79,12 @@
                         <div id="show-nama"></div>
                     </div>
                     <div class="form-group">
-                        <label for="show-resep">Resep</label>
-                        <div id="show-resep"></div>
+                        <label for="show-bahan">Bahan-bahan</label>
+                        <div id="show-bahan"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="show-cara">Cara Membuat</label>
+                        <div id="show-cara"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -109,7 +108,8 @@
                     dataType: 'json',
                     success: function(res){
                         $('#show-nama').text(res.nama);
-                        $('#show-resep').html(res.resep.replace(/\n/g, '<br>'));
+                        $('#show-bahan').html(res.bahan.replace(/\n/g, '<br>'));
+                        $('#show-cara').html(res.cara.replace(/\n/g, '<br>'));
                         $('#show-id').text(res.id);
                     },
                 });
