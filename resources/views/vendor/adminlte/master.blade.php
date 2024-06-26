@@ -76,6 +76,8 @@
 
 </head>
 
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 <body class="@yield('classes_body')" @yield('body_data')>
 
     {{-- Body Content --}}

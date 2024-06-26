@@ -7,58 +7,113 @@
 @stop
 
 @section('content')
-    <div class="card">
-        <div class="card-header">{{__('Dashboard')}}</div>
-        <div class="card-body">
-            @if($user->roles_id == 1)
+    @if($user->roles_id == 1)
+        <div class="card">
+            <div class="card-header">{{__('Dashboard')}}</div>
+            <div class="card-body">
                 Anda login sebagai admin
-            @else
-            @endif
-            <canvas id="barChart" width="400" height="400"></canvas>
+            </div>
         </div>
-    </div>
+    @elseif($user->roles_id == 2)
+        <div class="card card-primary">
+            <div class="card-header ">Diagram Berat Badan Ideal (BBI)</div>
+            <div class="card-body">
+                <div id="chart"></div>
+            </div>
+        </div>
+    @endif
 @stop
 
 @section('js')
+    @if($user->roles_id == 2)
+        <script>
+            // Mengambil data dari blade template
+            var data = @json($data);
+            var rangeMin = @json($rangeMin);
+            var rangeMinToleran = @json($rangeMinToleran);
+            var rangeMax = @json($rangeMax);
+            var rangeMaxToleran = @json($rangeMaxToleran);
+            var categories = @json($categories);
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        fetch('/chart-data')
-            .then(response => response.json())
-            .then(data => {
-                var ctx = document.getElementById('barChart').getContext('2d');
-                var barChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
-                        datasets: [{
-                            label: 'Actual',
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1,
-                            data: data.actual,
-                        }, {
-                            label: 'Target',
-                            type: 'line',
-                            fill: false,
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 2,
-                            data: data.target,
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
+            var options = {
+                chart: {
+                    type: 'area',
+                    height: 350
+                },
+                series: [{
+                    name: 'BMI',
+                    data: data
+                }],
+                xaxis: {
+                    categories: categories,
+                    title: {
+                        text: 'Frekuensi'
                     }
-                });
-            })
-            .catch(error => console.error('Fetch error:', error));
-    });
-</script>
+                },
+                yaxis: {
+                    min: rangeMinToleran,
+                    max: rangeMaxToleran,
+                    title: {
+                        text: 'Nilai Berat Badan Ideal (BBI)'
+                    }
+                },
+                annotations: {
+                    yaxis: [
+                        {
+                            y: rangeMin,
+                            borderColor: '#FF4560',
+                            label: {
+                                borderColor: '#FF4560',
+                                style: {
+                                    color: '#fff',
+                                    background: '#FF4560'
+                                },
+                                text: 'Under Weight',
+                                offsetX: -50,
+                                offsetY: 45,
+                                textAnchor: 'middle'
+                            }
+                        },
+                        {
+                            y: rangeMin,
+                            y2: rangeMax,
+                            borderColor: '#008000',
+                            fillColor: '#008000',
+                            opacity: 0.2,
+                            label: {
+                                borderColor: '#008000',
+                                style: {
+                                    color: '#fff',
+                                    background: '#008000'
+                                },
+                                text: 'Normal',
+                                offsetY: 60,
+                                offsetX: -20,
+                            }
+                        },
+                        {
+                            y: rangeMax,
+                            borderColor: '#FEB019',
+                            stroke: {
+                                width: 40
+                            },
+                            label: {
+                                borderColor: '#FEB019',
+                                style: {
+                                    color: '#fff',
+                                    background: '#FEB019'
+                                },
+                                text: 'Over Weight',
+                                offsetX: -15,
+                                offsetY: -37,
+                            }
+                        }
+                    ]
+                }
+            }
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+        </script>
+    @endif
 @stop

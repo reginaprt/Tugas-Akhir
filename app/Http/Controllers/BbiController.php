@@ -47,19 +47,17 @@ class BbiController extends Controller
         $bbi->berat_badan = $req->get('berat_badan');
         $bbi->tinggi_badan = $req->get('tinggi_badan');
 
-        // Menghitung BMI
-        $jadi = $req->get('berat_badan') / (($req->get('tinggi_badan') / 100) ** 2);
+        $tanggal_lahir = $req->get('tanggal_lahir');
+        $tahun_lahir = date('Y', strtotime($tanggal_lahir));
+        $tahun_sekarang = date('Y');
+        $usia = $tahun_sekarang - $tahun_lahir;
 
-        // Menentukan kategori berdasarkan BMI
-        if ($jadi < 18.5) {
-            $hasil = 'Under';
-        } elseif ($jadi >= 18.5 && $jadi < 24.9) {
-            $hasil = 'Normal';
-        } else {
-            $hasil = 'Over';
-        }
+        $jenisKelamin = $req->input('jenis_kelamin') == 'L' ? 'laki-laki' : 'perempuan';
+        $beratBadan = $req->input('berat_badan');
 
-        $bbi->hasil = $hasil ;
+        $status = $this->determineStatus($usia, $jenisKelamin, $beratBadan);
+
+        $bbi->hasil = $status ;
 
         $bbi->save();
 
@@ -69,6 +67,42 @@ class BbiController extends Controller
         );
 
         return redirect()->route('user.bbi')->with($notification);
+    }
+
+    private function determineStatus($usia, $jenisKelamin, $beratBadan)
+    {
+        $rangeBeratBadan = [
+            'laki-laki' => [
+                1 => ['min' => 7.7, 'max' => 12.0],
+                2 => ['min' => 9.7, 'max' => 15.3],
+                3 => ['min' => 11.3, 'max' => 18.3],
+                4 => ['min' => 12.7, 'max' => 21.2],
+                5 => ['min' => 14.1, 'max' => 24.2],
+                6 => ['min' => 15.9, 'max' => 27.1],
+            ],
+            'perempuan' => [
+                1 => ['min' => 7.0, 'max' => 11.5],
+                2 => ['min' => 9.0, 'max' => 14.8],
+                3 => ['min' => 10.8, 'max' => 18.1],
+                4 => ['min' => 12.3, 'max' => 21.5],
+                5 => ['min' => 13.7, 'max' => 24.9],
+                6 => ['min' => 15.3, 'max' => 26.8],
+            ]
+        ];
+
+        if (!isset($rangeBeratBadan[$jenisKelamin][$usia])) {
+            return 'Data tidak valid';
+        }
+
+        $rangeBerat = $rangeBeratBadan[$jenisKelamin][$usia];
+
+        if ($beratBadan < $rangeBerat['min']) {
+            return 'Under';
+        } elseif ($beratBadan > $rangeBerat['max']) {
+            return 'Over';
+        } else {
+            return 'Normal';
+        }
     }
 
     // bbi Delete ----------------------------------------------------------------------------------------------------

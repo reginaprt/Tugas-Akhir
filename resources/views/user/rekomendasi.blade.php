@@ -49,15 +49,16 @@
                 <p class="text-center">Hasil Perhitungan Berat Badan Ideal</p>
                 <p class="text-center text-bold">
                     @if($user->hasil == 'Under')
-                        Kekurangan Berat Badan
+                        <span style="color: yellow;">Kekurangan Berat Badan</span>
                     @elseif($user->hasil == 'Normal')
-                        Berat Badan Normal
+                        <span style="color: green;">Berat Badan Normal</span>
                     @elseif($user->hasil == 'Over')
-                        Kelebihan Berat Badan
+                        <span style="color: red;">Kelebihan Berat Badan</span>
                     @else
                         Lengkapi Data Dulu
                     @endif
                 </p>
+
                 <a href="{{ route ('user.rekomen.check')}}" type="button" class="btn btn-success w-100">Ayo Cek Menu Rekomendasi!</a>
             </div>
         </div>

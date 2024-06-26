@@ -62,8 +62,6 @@ class HasilController extends Controller
         $results['rekomenOver6'] = $rekomenOver[5];
         $results['rekomenOver7'] = $rekomenOver[6];
 
-        dd($resep);
-
         return view('user.hasil', compact('user', 'results'));
     }
 

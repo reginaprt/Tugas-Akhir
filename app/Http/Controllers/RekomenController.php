@@ -51,24 +51,24 @@ class RekomenController extends Controller
 
         // Kriteria dan bobot untuk tiga kategori: under, normal, over
         $under = [
-            ['kode' => 'C1', 'kriteria' => 'Energi', 'bobot' => 20],
-            ['kode' => 'C2', 'kriteria' => 'Protein', 'bobot' => 10],
-            ['kode' => 'C3', 'kriteria' => 'Lemak', 'bobot' => 30],
-            ['kode' => 'C4', 'kriteria' => 'Karbo', 'bobot' => 40],
+            ['kode' => 'C1', 'kriteria' => 'Energi', 'bobot' => 21],
+            ['kode' => 'C2', 'kriteria' => 'Protein', 'bobot' => 28],
+            ['kode' => 'C3', 'kriteria' => 'Lemak', 'bobot' => 28],
+            ['kode' => 'C4', 'kriteria' => 'Karbo', 'bobot' => 21],
         ];
 
         $normal = [
-            ['kode' => 'C1', 'kriteria' => 'Energi', 'bobot' => 40],
-            ['kode' => 'C2', 'kriteria' => 'Protein', 'bobot' => 10],
-            ['kode' => 'C3', 'kriteria' => 'Lemak', 'bobot' => 20],
-            ['kode' => 'C4', 'kriteria' => 'Karbo', 'bobot' => 30],
+            ['kode' => 'C1', 'kriteria' => 'Energi', 'bobot' => 25],
+            ['kode' => 'C2', 'kriteria' => 'Protein', 'bobot' => 25],
+            ['kode' => 'C3', 'kriteria' => 'Lemak', 'bobot' => 25],
+            ['kode' => 'C4', 'kriteria' => 'Karbo', 'bobot' => 23],
         ];
 
         $over = [
-            ['kode' => 'C1', 'kriteria' => 'Energi', 'bobot' => 40],
-            ['kode' => 'C2', 'kriteria' => 'Protein', 'bobot' => 30],
-            ['kode' => 'C3', 'kriteria' => 'Lemak', 'bobot' => 10],
-            ['kode' => 'C4', 'kriteria' => 'Karbo', 'bobot' => 20],
+            ['kode' => 'C1', 'kriteria' => 'Energi', 'bobot' => 30],
+            ['kode' => 'C2', 'kriteria' => 'Protein', 'bobot' => 20],
+            ['kode' => 'C3', 'kriteria' => 'Lemak', 'bobot' => 20],
+            ['kode' => 'C4', 'kriteria' => 'Karbo', 'bobot' => 30],
         ];
 
         // Menghitung ranking menggunakan metode TOPSIS
@@ -142,7 +142,7 @@ class RekomenController extends Controller
             $rekomenOver7[] = $hasilOver[$i * 7 + 6];
         }
 
-        dd($hasilNormal);
+        // dd($hasilNormal);
         $resep = [
             'rekomenNormal' => [
                 $rekomenNormal1, $rekomenNormal2, $rekomenNormal3, $rekomenNormal4, $rekomenNormal5, $rekomenNormal6, $rekomenNormal7

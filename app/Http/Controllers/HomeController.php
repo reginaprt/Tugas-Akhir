@@ -28,23 +28,48 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $tinggiBadann = Hasil::where('name', $user->name)->pluck('tinggi_badan');
-        $beratBadann = Hasil::where('name', $user->name)->pluck('tinggi_badan');
+        $beratBadann = Hasil::where('name', $user->name)->pluck('berat_badan');
 
         $tinggiBadan = $tinggiBadann->toArray();
-        $beratBadan = $beratBadann->toArray();
+        $data = $beratBadann->toArray();
 
-
-        $data = [];
-        foreach ($tinggiBadan as $index => $tinggi) {
-            $data[] = [
-                'tinggi' => $tinggi,
-                'berat' => $beratBadan[$index]
-            ];
+        // Kategori untuk frekuensi
+        $categories = [];
+        for ($i = 0; $i < count($data); $i++) {
+            $categories[] = ($i + 1);
         }
 
-        $actualData = [50, 60, 70, 80, 90]; // Contoh data nilai aktual
-        $targetData = [55, 65, 75, 85, 95]; // Contoh data nilai target
+        $rangeBeratBadan = [
+            'laki-laki' => [
+                1 => ['min' => 7.7, 'max' => 12.0],
+                2 => ['min' => 9.7, 'max' => 15.3],
+                3 => ['min' => 11.3, 'max' => 18.3],
+                4 => ['min' => 12.7, 'max' => 21.2],
+                5 => ['min' => 14.1, 'max' => 24.2],
+                6 => ['min' => 15.9, 'max' => 27.1],
+            ],
+            'perempuan' => [
+                1 => ['min' => 7.0, 'max' => 11.5],
+                2 => ['min' => 9.0, 'max' => 14.8],
+                3 => ['min' => 10.8, 'max' => 18.1],
+                4 => ['min' => 12.3, 'max' => 21.5],
+                5 => ['min' => 13.7, 'max' => 24.9],
+                6 => ['min' => 15.3, 'max' => 26.8],
+            ]
+        ];
 
-        return view('home', compact('user', 'data', 'actualData', 'targetData'));
+
+        $tahun_lahir = date('Y', strtotime($user->tanggal_lahir));
+        $tahun_sekarang = date('Y');
+        $usia = $tahun_sekarang - $tahun_lahir;
+
+        $jenisKelamin = $user->jenis_kelamin == 'L' ? 'laki-laki' : 'perempuan';
+        $rangeMin = $rangeBeratBadan[$jenisKelamin][$usia]['min'];
+        $rangeMax = $rangeBeratBadan[$jenisKelamin][$usia]['max'];
+
+        $rangeMinToleran = $rangeMin - 3;
+        $rangeMaxToleran = $rangeMax + 3;
+
+        return view('home', compact('user', 'data', 'usia', 'categories', 'rangeMin', 'rangeMax', 'rangeMinToleran', 'rangeMaxToleran'));
     }
 }

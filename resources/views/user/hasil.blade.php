@@ -58,15 +58,15 @@
             <div class="form-group text-center">
                 <div class="col-form-label">Hasil Perhitungan Berat Badan Ideal (BBI)</div>
                 <div class="mb-0" style="color: green">
-                <h5 class="text-bold">
-                    @if($user->hasil == 'Under')
-                    Kekurangan Berat Badan
-                    @elseif($user->hasil == 'Normal')
-                        Berat Badan Normal
-                    @elseif($user->hasil == 'Over')
-                        Kelebihan Berat Badan
+                    <h5 class="text-center text-bold">
+                        @if($user->hasil == 'Under')
+                            <span style="color: yellow;">Kekurangan Berat Badan</span>
+                        @elseif($user->hasil == 'Normal')
+                            <span style="color: green;">Berat Badan Normal</span>
+                        @elseif($user->hasil == 'Over')
+                            <span style="color: red;">Kelebihan Berat Badan</span>
                         @else
-                        Lengkapi Data Dulu
+                            Lengkapi Data Dulu
                         @endif
                     </h5>
                 </div>
