@@ -90,77 +90,101 @@ class RekomenController extends Controller
             $hasilOver[$index] = $data[$index];
         }
 
-        // Inisialisasi array untuk rekomendasi
-        $rekomenNormal1 = [];
-        $rekomenNormal2 = [];
-        $rekomenNormal3 = [];
-        $rekomenNormal4 = [];
-        $rekomenNormal5 = [];
-        $rekomenNormal6 = [];
-        $rekomenNormal7 = [];
 
-        $rekomenUnder1 = [];
-        $rekomenUnder2 = [];
-        $rekomenUnder3 = [];
-        $rekomenUnder4 = [];
-        $rekomenUnder5 = [];
-        $rekomenUnder6 = [];
-        $rekomenUnder7 = [];
-
-        $rekomenOver1 = [];
-        $rekomenOver2 = [];
-        $rekomenOver3 = [];
-        $rekomenOver4 = [];
-        $rekomenOver5 = [];
-        $rekomenOver6 = [];
-        $rekomenOver7 = [];
-
-        // Mengisi array rekomendasi
-        for ($i = 0; $i < 3; $i++) {
-            $rekomenNormal1[] = $hasilNormal[$i * 7];
-            $rekomenNormal2[] = $hasilNormal[$i * 7 + 1];
-            $rekomenNormal3[] = $hasilNormal[$i * 7 + 2];
-            $rekomenNormal4[] = $hasilNormal[$i * 7 + 3];
-            $rekomenNormal5[] = $hasilNormal[$i * 7 + 4];
-            $rekomenNormal6[] = $hasilNormal[$i * 7 + 5];
-            $rekomenNormal7[] = $hasilNormal[$i * 7 + 6];
-
-            $rekomenUnder1[] = $hasilUnder[$i * 7];
-            $rekomenUnder2[] = $hasilUnder[$i * 7 + 1];
-            $rekomenUnder3[] = $hasilUnder[$i * 7 + 2];
-            $rekomenUnder4[] = $hasilUnder[$i * 7 + 3];
-            $rekomenUnder5[] = $hasilUnder[$i * 7 + 4];
-            $rekomenUnder6[] = $hasilUnder[$i * 7 + 5];
-            $rekomenUnder7[] = $hasilUnder[$i * 7 + 6];
-
-            $rekomenOver1[] = $hasilOver[$i * 7];
-            $rekomenOver2[] = $hasilOver[$i * 7 + 1];
-            $rekomenOver3[] = $hasilOver[$i * 7 + 2];
-            $rekomenOver4[] = $hasilOver[$i * 7 + 3];
-            $rekomenOver5[] = $hasilOver[$i * 7 + 4];
-            $rekomenOver6[] = $hasilOver[$i * 7 + 5];
-            $rekomenOver7[] = $hasilOver[$i * 7 + 6];
+        // Membuat array baru untuk menyimpan indeks
+        $indexArrayUnder = array_keys($hasilUnder);
+        $arrayUnder = [];
+        foreach ($indexArrayUnder as $index) {
+            if (isset($hasilUnder[$index])) {
+                $arrayUnder[] = $hasilUnder[$index];
+            }
+        }
+        $indexArrayNormal = array_keys($hasilNormal);
+        $arrayNormal = [];
+        foreach ($indexArrayNormal as $index) {
+            if (isset($hasilNormal[$index])) {
+                $arrayNormal[] = $hasilNormal[$index];
+            }
+        }
+        $indexArrayOver = array_keys($hasilOver);
+        $arrayOver = [];
+        foreach ($indexArrayOver as $index) {
+            if (isset($hasilOver[$index])) {
+                $arrayOver[] = $hasilOver[$index];
+            }
         }
 
-        // dd($hasilNormal);
+        // Inisialisasi array baru
+        $rekomenUnder = [
+            'rekomenUnder1' => [], 'rekomenUnder2' => [], 'rekomenUnder3' => [], 'rekomenUnder4' => [], 'rekomenUnder5' => [], 'rekomenUnder6' => [], 'rekomenUnder7' => [],
+        ];
+        $rekomenNormal = [
+            'rekomenNormal1' => [], 'rekomenNormal2' => [], 'rekomenNormal3' => [], 'rekomenNormal4' => [], 'rekomenNormal5' => [], 'rekomenNormal6' => [], 'rekomenNormal7' => [],
+        ];
+        $rekomenOver = [
+            'rekomenOver1' => [], 'rekomenOver2' => [], 'rekomenOver3' => [], 'rekomenOver4' => [], 'rekomenOver5' => [], 'rekomenOver6' => [], 'rekomenOver7' => [],
+        ];
+
+        // Mengisi array baru
+        foreach ($arrayUnder as $key => $value) {
+            $index = $key % 7;
+            $arrayName = 'rekomenUnder' . ($index + 1);
+            $rekomenUnder[$arrayName][] = $value;
+        }
+        foreach ($arrayNormal as $key => $value) {
+            $index = $key % 7;
+            $arrayName = 'rekomenNormal' . ($index + 1);
+            $rekomenNormal[$arrayName][] = $value;
+        }
+        foreach ($arrayOver as $key => $value) {
+            $index = $key % 7;
+            $arrayName = 'rekomenOver' . ($index + 1);
+            $rekomenOver[$arrayName][] = $value;
+        }
+
+        // Slice data sehingga setiap hasil hanya memiliki 3 data teratas
+        foreach ($rekomenUnder as $key => $value) {
+            $rekomenUnder[$key] = array_slice($value, 0, 3);
+        }
+
+        foreach ($rekomenNormal as $key => $value) {
+            $rekomenNormal[$key] = array_slice($value, 0, 3);
+        }
+
+        foreach ($rekomenOver as $key => $value) {
+            $rekomenOver[$key] = array_slice($value, 0, 3);
+        }
+
+        // dd($rekomenOver);
+
         $resep = [
             'rekomenNormal' => [
-                $rekomenNormal1, $rekomenNormal2, $rekomenNormal3, $rekomenNormal4, $rekomenNormal5, $rekomenNormal6, $rekomenNormal7
+                $rekomenNormal['rekomenNormal1'], $rekomenNormal['rekomenNormal2'], $rekomenNormal['rekomenNormal3'], $rekomenNormal['rekomenNormal4'], $rekomenNormal['rekomenNormal5'], $rekomenNormal['rekomenNormal6'], $rekomenNormal['rekomenNormal7']
             ],
             'rekomenUnder' => [
-                $rekomenUnder1, $rekomenUnder2, $rekomenUnder3, $rekomenUnder4, $rekomenUnder5, $rekomenUnder6, $rekomenUnder7
+                $rekomenUnder['rekomenUnder1'], $rekomenUnder['rekomenUnder2'], $rekomenUnder['rekomenUnder3'], $rekomenUnder['rekomenUnder4'], $rekomenUnder['rekomenUnder5'], $rekomenUnder['rekomenUnder6'], $rekomenUnder['rekomenUnder7']
             ],
             'rekomenOver' => [
-                $rekomenOver1, $rekomenOver2, $rekomenOver3, $rekomenOver4, $rekomenOver5, $rekomenOver6, $rekomenOver7
+                $rekomenOver['rekomenOver1'], $rekomenOver['rekomenOver2'], $rekomenOver['rekomenOver3'], $rekomenOver['rekomenOver4'], $rekomenOver['rekomenOver5'], $rekomenOver['rekomenOver6'], $rekomenOver['rekomenOver7']
             ]
         ];
 
-        // Simpan ke database hanya jika tidak ada data yang sama
-        $existingData = Hasil::where('berat_badan', $user->berat_badan)
-                                    ->where('tinggi_badan', $user->tinggi_badan)
-                                    ->first();
 
-        if (!$existingData) {
+        // Ambil data terakhir dari database
+        $lastHasil = Hasil::orderBy('created_at', 'desc')->first();
+
+        // Bandingkan data terakhir dengan data yang akan diinputkan
+        $isSame = $lastHasil &&
+                  $lastHasil->name == $user->name &&
+                  $lastHasil->jenis_kelamin == $user->jenis_kelamin &&
+                  $lastHasil->tanggal_lahir == $user->tanggal_lahir &&
+                  $lastHasil->berat_badan == $user->berat_badan &&
+                  $lastHasil->tinggi_badan == $user->tinggi_badan &&
+                  $lastHasil->hasil == $user->hasil &&
+                  $lastHasil->resep == json_encode($resep);
+
+        if (!$isSame) {
+            // Data tidak sama, maka simpan
             $hasil = new Hasil();
 
             $hasil->name = $user->name;
@@ -174,12 +198,9 @@ class RekomenController extends Controller
             $hasil->save();
         }
 
+        // dd($resep);
 
-        return view('user.check',
-            compact('user','data', 'hasilOver',
-            'rekomenNormal1', 'rekomenNormal2', 'rekomenNormal3', 'rekomenNormal4', 'rekomenNormal5', 'rekomenNormal6', 'rekomenNormal7',
-            'rekomenUnder1', 'rekomenUnder2', 'rekomenUnder3', 'rekomenUnder4', 'rekomenUnder5', 'rekomenUnder6', 'rekomenUnder7',
-            'rekomenOver1', 'rekomenOver2', 'rekomenOver3', 'rekomenOver4', 'rekomenOver5', 'rekomenOver6', 'rekomenOver7'));
+        return view('user.check', compact('user','data', 'hasilOver', 'resep', 'rekomenNormal', 'rekomenUnder', 'rekomenOver'));
     }
 
     private function calculateTopsis($data, $criteria)

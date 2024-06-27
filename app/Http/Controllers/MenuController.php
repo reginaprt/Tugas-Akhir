@@ -19,10 +19,10 @@ class MenuController extends Controller
     {
         $validated = $req->validate([
             'nama' => 'required|max:50',
-            'energi' => 'required|integer',
-            'protein' => 'required|integer',
-            'lemak' => 'required|integer',
-            'karbo' => 'required|integer',
+            'energi' => 'required|numeric',
+            'protein' => 'required|numeric',
+            'lemak' => 'required|numeric',
+            'karbo' => 'required|numeric',
             'bahan' => 'required',
             'cara' => 'required',
         ]);
@@ -66,10 +66,10 @@ class MenuController extends Controller
 
         $validated = $req->validate([
             'nama' => 'sometimes|required|max:50',
-            'energi' => 'sometimes|required|integer',
-            'protein' => 'sometimes|required|integer',
-            'lemak' => 'sometimes|required|integer',
-            'karbo' => 'sometimes|required|integer',
+            'energi' => 'sometimes|required|numeric',
+            'protein' => 'sometimes|required|numeric',
+            'lemak' => 'sometimes|required|numeric',
+            'karbo' => 'sometimes|required|numeric',
             'bahan' => 'sometimes|required',
             'cara' => 'sometimes|required',
         ]);

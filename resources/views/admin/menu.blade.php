@@ -26,10 +26,11 @@
                         <tr>
                             <th class="text-center">ID</th>
                             <th>Nama Makanan</th>
-                            <th class="text-center">Energi</th>
-                            <th class="text-center">Protein</th>
-                            <th class="text-center">Lemak</th>
-                            <th class="text-center">Karbo</th>
+                            <th class="text-center">Energi (kkal)</th>
+                            <th class="text-center">Protein (gr)</th>
+                            <th class="text-center">Lemak (gr)</th>
+                            <th class="text-center">Karbo (gr)</th>
+                            <th class="text-center">Dibuat</th>
                             <th class="text-center">Resep</th>
                             <th class="text-center">Aksi</th>
                         </tr>
@@ -37,12 +38,13 @@
                     <tbody>
                         @foreach($menus as $menu)
                         <tr>
-                            <td class="text-center">{{ $menu->id }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $menu->nama }}</td>
                             <td class="text-center">{{ $menu->energi }}</td>
                             <td class="text-center">{{ $menu->protein }}</td>
                             <td class="text-center">{{ $menu->lemak }}</td>
                             <td class="text-center">{{ $menu->karbo }}</td>
+                            <td class="text-center">{{ $menu->created_at->format('Y-m-d') }}</td>
                             <td class="text-center">
                                 <a href="#" data-toggle="modal" id="showresep" data-id="{{ $menu->id }}" data-target="#resepModal">
                                     Lihat Resep
@@ -84,19 +86,19 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="energi">Energi</label>
-                            <input type="number" class="form-control" id="energi" name="energi" required>
+                            <input type="number" class="form-control" id="energi" name="energi" step="0.01" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="protein">Protein</label>
-                            <input type="number" class="form-control" id="protein" name="protein" required>
+                            <input type="number" class="form-control" id="protein" name="protein" step="0.01" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="lemak">Lemak</label>
-                            <input type="number" class="form-control" id="lemak" name="lemak" required>
+                            <input type="number" class="form-control" id="lemak" name="lemak" step="0.01" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="karbo">Karbo</label>
-                            <input type="number" class="form-control" id="karbo" name="karbo" required>
+                            <input type="number" class="form-control" id="karbo" name="karbo" step="0.01" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -139,19 +141,19 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="edit-energi">Energi</label>
-                                <input type="number" class="form-control" id="edit-energi" name="energi" required>
+                                <input type="number" class="form-control" id="edit-energi" name="energi" step="0.01" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="edit-protein">Protein</label>
-                                <input type="number" class="form-control" id="edit-protein" name="protein" required>
+                                <input type="number" class="form-control" id="edit-protein" name="protein" step="0.01" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="edit-lemak">Lemak</label>
-                                <input type="number" class="form-control" id="edit-lemak" name="lemak" required>
+                                <input type="number" class="form-control" id="edit-lemak" name="lemak" step="0.01" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="edit-karbo">Karbo</label>
-                                <input type="number" class="form-control" id="edit-karbo" name="karbo" required>
+                                <input type="number" class="form-control" id="edit-karbo" name="karbo" step="0.01" required>
                             </div>
                         </div>
                         <div class="form-group">

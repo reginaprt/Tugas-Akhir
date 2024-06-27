@@ -60,7 +60,7 @@
                 <div class="mb-0" style="color: green">
                     <h5 class="text-center text-bold">
                         @if($user->hasil == 'Under')
-                            <span style="color: yellow;">Kekurangan Berat Badan</span>
+                            <span style="color: orange;">Kekurangan Berat Badan</span>
                         @elseif($user->hasil == 'Normal')
                             <span style="color: green;">Berat Badan Normal</span>
                         @elseif($user->hasil == 'Over')

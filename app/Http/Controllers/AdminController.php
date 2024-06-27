@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Menu;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,8 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('home', compact('user'));
+        $jumlahMenu = Menu::count();
+
+        return view('home', compact('user', 'jumlahMenu'));
     }
 }

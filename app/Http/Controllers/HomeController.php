@@ -58,18 +58,20 @@ class HomeController extends Controller
             ]
         ];
 
+        $usia = NULL;
+        $rangeMin = NULL;
+        $rangeMax = NULL;
 
-        $tahun_lahir = date('Y', strtotime($user->tanggal_lahir));
-        $tahun_sekarang = date('Y');
-        $usia = $tahun_sekarang - $tahun_lahir;
+        if($user->tanggal_lahir){
+            $tahun_lahir = date('Y', strtotime($user->tanggal_lahir));
+            $tahun_sekarang = date('Y');
+            $usia = $tahun_sekarang - $tahun_lahir;
 
-        $jenisKelamin = $user->jenis_kelamin == 'L' ? 'laki-laki' : 'perempuan';
-        $rangeMin = $rangeBeratBadan[$jenisKelamin][$usia]['min'];
-        $rangeMax = $rangeBeratBadan[$jenisKelamin][$usia]['max'];
+            $jenisKelamin = $user->jenis_kelamin == 'L' ? 'laki-laki' : 'perempuan';
+            $rangeMin = $rangeBeratBadan[$jenisKelamin][$usia]['min'];
+            $rangeMax = $rangeBeratBadan[$jenisKelamin][$usia]['max'];
+        }
 
-        $rangeMinToleran = $rangeMin - 3;
-        $rangeMaxToleran = $rangeMax + 3;
-
-        return view('home', compact('user', 'data', 'usia', 'categories', 'rangeMin', 'rangeMax', 'rangeMinToleran', 'rangeMaxToleran'));
+        return view('home', compact('user', 'data', 'usia', 'categories', 'rangeMin', 'rangeMax'));
     }
 }

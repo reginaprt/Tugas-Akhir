@@ -62,6 +62,7 @@ class HasilController extends Controller
         $results['rekomenOver6'] = $rekomenOver[5];
         $results['rekomenOver7'] = $rekomenOver[6];
 
+        // dd($results);
         return view('user.hasil', compact('user', 'results'));
     }
 
@@ -70,6 +71,7 @@ class HasilController extends Controller
 
         $user = Auth::user();
         $rekomen = Hasil::where('name', $user->name)->latest()->first();
+
 
         // Decode data JSON menjadi array
         $resep = json_decode($rekomen->resep, true);

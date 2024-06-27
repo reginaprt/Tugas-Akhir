@@ -13,7 +13,7 @@
         .card-header {
             padding: 0.75rem 1.25rem;
             margin-bottom: 0;
-            background-color: rgba(0, 0, 0, 0.03);
+            background-color: rgb(36, 103, 248);
             border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
 
@@ -92,7 +92,7 @@
 </head>
 <body>
     <div class="card card-primary">
-        <div class="card-header">Data Balita</div>
+        <div class="card-header" style="color: white;">Data Balita</div>
         <div class="card-body">
             <table class="table">
                 <tr>
@@ -153,7 +153,7 @@
 
     @foreach ($rekomendasi as $index => $rekomendasiGroup)
         <div class="card card-secondary">
-            <div class="card-header">Rekomendasi Hari {{ ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'][$index] }}</div>
+            <div class="card-header" style="color: white;">Rekomendasi Hari {{ ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'][$index] }}</div>
             <div class="table-responsive">
                 <table class="table" style="width: 100%;">
                     <thead>
@@ -169,49 +169,26 @@
                     <tbody>
                         @foreach ($rekomendasiGroup as $menu)
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $menu['Nama'] }}</td>
-                                <td class="text-center">{{ $menu['Energi'] }}</td>
-                                <td class="text-center">{{ $menu['Protein'] }}</td>
-                                <td class="text-center">{{ $menu['Lemak'] }}</td>
-                                <td class="text-center">{{ $menu['Karbo'] }}</td>
+                                <td class="text-center text-bold">{{ $loop->iteration }}</td>
+                                <td class="text-bold">{{ $menu['Nama'] }}</td>
+                                <td class="text-center text-bold">{{ $menu['Energi'] }}</td>
+                                <td class="text-center text-bold">{{ $menu['Protein'] }}</td>
+                                <td class="text-center text-bold">{{ $menu['Lemak'] }}</td>
+                                <td class="text-center text-bold">{{ $menu['Karbo'] }}</td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                            <tr>
+                                <td class="text-center" colspan="1">Bahan</td>
+                                <td colspan="6">{{ $menu['Bahan'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" colspan="1">Cara</td>
+                                <td colspan="6">{{ $menu['Cara'] }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
         </div>
     @endforeach
-    @foreach ($rekomendasi as $index => $rekomendasiGroup)
-    <div class="card card-secondary">
-        <div class="card-header">Rekomendasi Hari {{ ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'][$index] }}</div>
-
-        @foreach ($rekomendasiGroup as $menu)
-            <div class="card-body">
-                <div class="card card-secondary">
-                    <div class="card-header">Resep Menu Makanan {{ $loop->iteration }}</div>
-                    <div class="card-body">
-                        <table class="table">
-                            <tr>
-                                <td>Nama</td>
-                                <td>{{ $menu['Nama'] }}</td>
-                            </tr>
-                            <tr>
-                                <td>Bahan-bahan</td>
-                                <td>{{ $menu['Bahan'] }}</td>
-                            </tr>
-                            <tr>
-                                <td>Cara Memasak</td>
-                                <td>{{ $menu['Cara'] }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-
-    </div>
-@endforeach
-
 </body>
 </html>

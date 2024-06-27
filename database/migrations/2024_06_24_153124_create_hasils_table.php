@@ -20,7 +20,7 @@ class CreateHasilsTable extends Migration
             $table->date('tanggal_lahir')->nullable();
             $table->integer('berat_badan')->nullable();
             $table->integer('tinggi_badan')->nullable();
-            $table->string('resep', 10000)->nullable();
+            $table->longtext('resep')->nullable();
             $table->string('hasil')->nullable();
             $table->timestamps();
         });

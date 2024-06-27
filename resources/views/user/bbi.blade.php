@@ -61,7 +61,7 @@
                 <div class="form-group row">
                     <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required value="{{$user->tanggal_lahir}}" {{ $user->tanggal_lahir ? 'readonly' : '' }}>
+                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required value="{{$user->tanggal_lahir}}">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary col-md-12">Simpan Perubahan</button>

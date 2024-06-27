@@ -8,17 +8,33 @@
 
 @section('content')
     @if($user->roles_id == 1)
-        <div class="card">
-            <div class="card-header">{{__('Dashboard')}}</div>
-            <div class="card-body">
-                Anda login sebagai admin
+            <div class="info-box mb-3 bg-secondary col-md-5">
+                <span class="info-box-icon">
+                    <ion-icon name="person-outline"></ion-icon>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Welcome</span>
+                    <span class="info-box-number">Admin</span>
+                </div>
             </div>
-        </div>
+            <div class="info-box mb-3 bg-success col-md-5">
+                <span class="info-box-icon">
+                    <ion-icon name="fast-food-outline"></ion-icon>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Menu</span>
+                    <span class="info-box-number">{{$jumlahMenu}}</span>
+                </div>
+            </div>
     @elseif($user->roles_id == 2)
         <div class="card card-primary">
             <div class="card-header ">Diagram Berat Badan Ideal (BBI)</div>
             <div class="card-body">
+            @if($usia == NULL)
+                Data Belum Tersedia
+            @else
                 <div id="chart"></div>
+            @endif
             </div>
         </div>
     @endif
@@ -27,18 +43,15 @@
 @section('js')
     @if($user->roles_id == 2)
         <script>
-            // Mengambil data dari blade template
             var data = @json($data);
             var rangeMin = @json($rangeMin);
-            var rangeMinToleran = @json($rangeMinToleran);
             var rangeMax = @json($rangeMax);
-            var rangeMaxToleran = @json($rangeMaxToleran);
             var categories = @json($categories);
 
             var options = {
                 chart: {
                     type: 'area',
-                    height: 350
+                    height: 600
                 },
                 series: [{
                     name: 'BMI',
@@ -51,10 +64,10 @@
                     }
                 },
                 yaxis: {
-                    min: rangeMinToleran,
-                    max: rangeMaxToleran,
+                    min: 0,
+                    max: 37,
                     title: {
-                        text: 'Nilai Berat Badan Ideal (BBI)'
+                        text: 'Nilai Berat Badan (Kg)'
                     }
                 },
                 annotations: {
@@ -70,7 +83,7 @@
                                 },
                                 text: 'Under Weight',
                                 offsetX: -50,
-                                offsetY: 45,
+                                offsetY: 20,
                                 textAnchor: 'middle'
                             }
                         },
@@ -80,23 +93,10 @@
                             borderColor: '#008000',
                             fillColor: '#008000',
                             opacity: 0.2,
-                            label: {
-                                borderColor: '#008000',
-                                style: {
-                                    color: '#fff',
-                                    background: '#008000'
-                                },
-                                text: 'Normal',
-                                offsetY: 60,
-                                offsetX: -20,
-                            }
                         },
                         {
                             y: rangeMax,
                             borderColor: '#FEB019',
-                            stroke: {
-                                width: 40
-                            },
                             label: {
                                 borderColor: '#FEB019',
                                 style: {
@@ -105,15 +105,18 @@
                                 },
                                 text: 'Over Weight',
                                 offsetX: -15,
-                                offsetY: -37,
                             }
                         }
                     ]
+                },
+                title: {
+                    text: 'Grafik BMI Berdasarkan Frekuensi dan Nilai Berat Badan Ideal'
                 }
-            }
+            };
 
             var chart = new ApexCharts(document.querySelector("#chart"), options);
             chart.render();
+
         </script>
     @endif
 @stop

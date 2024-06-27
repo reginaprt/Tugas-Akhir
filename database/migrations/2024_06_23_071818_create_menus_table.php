@@ -16,10 +16,10 @@ class CreateMenusTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 50);
-            $table->integer('energi');
-            $table->integer('protein');
-            $table->integer('lemak');
-            $table->integer('karbo');
+            $table->float('energi');
+            $table->float('protein');
+            $table->float('lemak');
+            $table->float('karbo');
             $table->text('bahan');
             $table->text('cara');
             $table->timestamps();

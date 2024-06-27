@@ -9,16 +9,15 @@
 @section('content')
     @php
         $rekomendasi = [];
-
         switch ($user->hasil) {
             case 'Under':
-                $rekomendasi = [$rekomenUnder1, $rekomenUnder2, $rekomenUnder3, $rekomenUnder4, $rekomenUnder5, $rekomenUnder6, $rekomenUnder7];
+                $rekomendasi = [$rekomenUnder['rekomenUnder1'], $rekomenUnder['rekomenUnder2'], $rekomenUnder['rekomenUnder3'], $rekomenUnder['rekomenUnder4'], $rekomenUnder['rekomenUnder5'], $rekomenUnder['rekomenUnder6'], $rekomenUnder['rekomenUnder7']];
                 break;
             case 'Normal':
-                $rekomendasi = [$rekomenNormal1, $rekomenNormal2, $rekomenNormal3, $rekomenNormal4, $rekomenNormal5, $rekomenNormal6, $rekomenNormal7];
+                $rekomendasi = [$rekomenNormal['rekomenNormal1'], $rekomenNormal['rekomenNormal2'], $rekomenNormal['rekomenNormal3'], $rekomenNormal['rekomenNormal4'], $rekomenNormal['rekomenNormal5'], $rekomenNormal['rekomenNormal6'], $rekomenNormal['rekomenNormal7']];
                 break;
             case 'Over':
-                $rekomendasi = [$rekomenOver1, $rekomenOver2, $rekomenOver3, $rekomenOver4, $rekomenOver5, $rekomenOver6, $rekomenOver7];
+                $rekomendasi = [$rekomenOver['rekomenOver1'], $rekomenOver['rekomenOver2'], $rekomenOver['rekomenOver3'], $rekomenOver['rekomenOver4'], $rekomenOver['rekomenOver5'], $rekomenOver['rekomenOver6'], $rekomenOver['rekomenOver7']];
                 break;
             default:
                 break;
@@ -35,9 +34,9 @@
                             <th class="text-center">No</th>
                             <th>Nama Menu</th>
                             <th class="text-center">Energi (kkal)</th>
-                            <th class="text-center">Protein (g)</th>
-                            <th class="text-center">Lemak (g)</th>
-                            <th class="text-center">Karbo (g)</th>
+                            <th class="text-center">Protein (gr)</th>
+                            <th class="text-center">Lemak (gr)</th>
+                            <th class="text-center">Karbo (gr)</th>
                             <th class="text-center">Resep</th>
                         </tr>
                     </thead>
