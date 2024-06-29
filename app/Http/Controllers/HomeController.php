@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Hasil;
+use App\Models\Menu;
 
 class HomeController extends Controller
 {
@@ -58,9 +59,14 @@ class HomeController extends Controller
             ]
         ];
 
+        $jumlahMenu = Menu::count();
+
         $usia = NULL;
         $rangeMin = NULL;
         $rangeMax = NULL;
+        $rangeMinToleran = NULL;
+        $rangeMaxToleran = NULL;
+
 
         if($user->tanggal_lahir){
             $tahun_lahir = date('Y', strtotime($user->tanggal_lahir));
@@ -70,8 +76,12 @@ class HomeController extends Controller
             $jenisKelamin = $user->jenis_kelamin == 'L' ? 'laki-laki' : 'perempuan';
             $rangeMin = $rangeBeratBadan[$jenisKelamin][$usia]['min'];
             $rangeMax = $rangeBeratBadan[$jenisKelamin][$usia]['max'];
+
         }
 
-        return view('home', compact('user', 'data', 'usia', 'categories', 'rangeMin', 'rangeMax'));
+        $rangeMinToleran = max(0, $rangeMin - 10);
+        $rangeMaxToleran = $rangeMax + 10;
+
+        return view('home', compact('user', 'data', 'usia', 'jumlahMenu', 'categories', 'rangeMin', 'rangeMax', 'rangeMinToleran', 'rangeMaxToleran'));
     }
 }

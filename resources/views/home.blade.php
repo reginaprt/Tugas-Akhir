@@ -46,6 +46,8 @@
             var data = @json($data);
             var rangeMin = @json($rangeMin);
             var rangeMax = @json($rangeMax);
+            var rangeMinToleran = @json($rangeMinToleran);
+            var rangeMaxToleran = @json($rangeMaxToleran);
             var categories = @json($categories);
 
             var options = {
@@ -64,8 +66,8 @@
                     }
                 },
                 yaxis: {
-                    min: 0,
-                    max: 37,
+                    min: rangeMinToleran,
+                    max: rangeMaxToleran,
                     title: {
                         text: 'Nilai Berat Badan (Kg)'
                     }
