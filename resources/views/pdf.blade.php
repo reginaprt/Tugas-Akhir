@@ -100,10 +100,6 @@
                     <td>{{$user->name}}</td>
                 </tr>
                 <tr>
-                    <th>Tinggi Badan</th>
-                    <td>{{$user->tinggi_badan}} cm</td>
-                </tr>
-                <tr>
                     <th>Tanggal Lahir</th>
                     <td>{{$user->tanggal_lahir}}</td>
                 </tr>

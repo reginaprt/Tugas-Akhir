@@ -42,83 +42,85 @@
 
 @section('js')
     @if($user->roles_id == 2)
-        <script>
-            var data = @json($data);
-            var rangeMin = @json($rangeMin);
-            var rangeMax = @json($rangeMax);
-            var rangeMinToleran = @json($rangeMinToleran);
-            var rangeMaxToleran = @json($rangeMaxToleran);
-            var categories = @json($categories);
-
-            var options = {
-                chart: {
-                    type: 'area',
-                    height: 600
-                },
-                series: [{
-                    name: 'BMI',
-                    data: data
-                }],
-                xaxis: {
-                    categories: categories,
-                    title: {
-                        text: 'Frekuensi'
-                    }
-                },
-                yaxis: {
-                    min: rangeMinToleran,
-                    max: rangeMaxToleran,
-                    title: {
-                        text: 'Nilai Berat Badan (Kg)'
-                    }
-                },
-                annotations: {
-                    yaxis: [
-                        {
-                            y: rangeMin,
-                            borderColor: '#FF4560',
-                            label: {
-                                borderColor: '#FF4560',
-                                style: {
-                                    color: '#fff',
-                                    background: '#FF4560'
-                                },
-                                text: 'Under Weight',
-                                offsetX: -50,
-                                offsetY: 20,
-                                textAnchor: 'middle'
-                            }
-                        },
-                        {
-                            y: rangeMin,
-                            y2: rangeMax,
-                            borderColor: '#008000',
-                            fillColor: '#008000',
-                            opacity: 0.2,
-                        },
-                        {
-                            y: rangeMax,
-                            borderColor: '#FEB019',
-                            label: {
-                                borderColor: '#FEB019',
-                                style: {
-                                    color: '#fff',
-                                    background: '#FEB019'
-                                },
-                                text: 'Over Weight',
-                                offsetX: -15,
-                            }
-                        }
-                    ]
-                },
+    <script>
+        var user = @json($user);
+        var data = @json($data);
+        var frekuensi = @json($frekuensi);
+        var rangeMin = @json($rangeMin);
+        var rangeMax = @json($rangeMax);
+        var rangeMinToleran = @json($rangeMinToleran);
+        var rangeMaxToleran = @json($rangeMaxToleran);
+    
+        var options = {
+            chart: {
+                type: 'area',
+                height: 600
+            },
+            series: [{
+                name: 'BMI',
+                data: data
+            }],
+            xaxis: {
+                categories: frekuensi,
                 title: {
-                    text: 'Grafik BMI Berdasarkan Frekuensi dan Nilai Berat Badan Ideal'
+                    text: 'Frekuensi'
                 }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
-
-        </script>
+            },
+            yaxis: {
+                min: rangeMinToleran,
+                max: rangeMaxToleran,
+                title: {
+                    text: 'Nilai Berat Badan (Kg)'
+                }
+            },
+            annotations: {
+                yaxis: [
+                    {
+                        y: rangeMin,
+                        borderColor: '#FF4560',
+                        label: {
+                            borderColor: '#FF4560',
+                            style: {
+                                color: '#fff',
+                                background: '#FF4560'
+                            },
+                            text: 'Under Weight',
+                            offsetX: -50,
+                            offsetY: 20,
+                            textAnchor: 'middle'
+                        }
+                    },
+                    {
+                        y: rangeMin,
+                        y2: rangeMax,
+                        borderColor: '#008000',
+                        fillColor: '#008000',
+                        opacity: 0.2,
+                    },
+                    {
+                        y: rangeMax,
+                        borderColor: '#FEB019',
+                        label: {
+                            borderColor: '#FEB019',
+                            style: {
+                                color: '#fff',
+                                background: '#FEB019'
+                            },
+                            text: 'Over Weight',
+                            offsetX: -15,
+                        }
+                    }
+                ]
+            },
+            title: {
+                text: 'Grafik BMI Berdasarkan Frekuensi dan Nilai Berat Badan Ideal'
+            }
+        };
+    
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    
+    </script>
+    
     @endif
 @stop

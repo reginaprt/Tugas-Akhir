@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('jenis_kelamin', 50)->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->integer('berat_badan')->nullable();
-            $table->integer('tinggi_badan')->nullable();
             $table->string('hasil')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();

@@ -81,7 +81,14 @@ class HomeController extends Controller
 
         $rangeMinToleran = max(0, $rangeMin - 10);
         $rangeMaxToleran = $rangeMax + 10;
+        
+        $temp = Hasil::where('name', $user->name)->pluck('created_at');
+        // $frekuensi = $temp->toArray();
+        // dd($temp);
+        $frekuensi = $temp->map(function($date) {
+            return \Carbon\Carbon::parse($date)->format('Y-m-d');
+        });
 
-        return view('home', compact('user', 'data', 'usia', 'jumlahMenu', 'categories', 'rangeMin', 'rangeMax', 'rangeMinToleran', 'rangeMaxToleran'));
+        return view('home', compact('user', 'data', 'frekuensi', 'usia', 'jumlahMenu', 'categories', 'rangeMin', 'rangeMax', 'rangeMinToleran', 'rangeMaxToleran'));
     }
 }

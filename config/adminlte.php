@@ -349,12 +349,12 @@ return [
             'icon' => 'fas fa-solid fa-utensils',
             'can'  => 'isUser',
         ],
-        [
-            'text' => '_ Hasil Akhir',
-            'url'  => 'user/hasil',
-            'icon' => 'fas fa-solid fa-file',
-            'can'  => 'isUser',
-        ],
+        // [
+        //     'text' => '_ Hasil Akhir',
+        //     'url'  => 'user/hasil',
+        //     'icon' => 'fas fa-solid fa-file',
+        //     'can'  => 'isUser',
+        // ],
     ],
 
     /*

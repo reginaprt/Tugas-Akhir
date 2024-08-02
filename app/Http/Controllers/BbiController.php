@@ -38,14 +38,12 @@ class BbiController extends Controller
             'jenis_kelamin' => 'sometimes|required',
             'tanggal_lahir' => 'sometimes|required|date',
             'berat_badan' => 'sometimes|required|numeric',
-            'tinggi_badan' => 'sometimes|required|numeric',
         ]);
 
         $bbi->name = $req->get('name');
         $bbi->jenis_kelamin = $req->get('jenis_kelamin');
         $bbi->tanggal_lahir = $req->get('tanggal_lahir');
         $bbi->berat_badan = $req->get('berat_badan');
-        $bbi->tinggi_badan = $req->get('tinggi_badan');
 
         $tanggal_lahir = $req->get('tanggal_lahir');
         $tahun_lahir = date('Y', strtotime($tanggal_lahir));

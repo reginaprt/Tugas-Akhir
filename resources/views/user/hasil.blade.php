@@ -28,17 +28,6 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="tinggi_badan" class="col-sm-2 col-form-label">Tinggi Badan</label>
-                <div class="col-sm-10">
-                    <div class="input-group">
-                        <input type="number" class="form-control" id="tinggi_badan" name="tinggi_badan" required readonly value="{{$user->tinggi_badan}}">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Cm</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label for="berat_badan" class="col-sm-2 col-form-label">Berat Badan</label>
                 <div class="col-sm-10">
                     <div class="input-group">
